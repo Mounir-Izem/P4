@@ -7,11 +7,21 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define item-related routes
-import itemActions from "./modules/item/itemActions";
+import categoriesActions from "./modules/categories/categoriesActions";
+import manufacturerActions from "./modules/manufacturers/manufacturerActions";
+import weaponsActions from "./modules/weapons/weaponsActions";
 
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+router.get("/api/categories/", categoriesActions.browse);
+router.get("/api/categories/:id", categoriesActions.read);
+router.post("/api/categories", categoriesActions.add);
+
+router.get("/api/manufacturers", manufacturerActions.browse);
+router.get("/api/manufacturers/:id", manufacturerActions.read);
+router.post("/api/manufacturers", manufacturerActions.add);
+
+router.get("/api/weapons", weaponsActions.browse);
+router.get("/api/weapons/:id", weaponsActions.read);
+router.post("/api/weapons", weaponsActions.add);
 
 /* ************************************************************************* */
 

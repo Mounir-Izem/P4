@@ -42,6 +42,7 @@ app.use(
 // Request Parsing: Understanding the purpose of this part
 
 // Request parsing is necessary to extract data sent by the client in an HTTP request.
+app.use(express.json());
 // For example to access the body of a POST request.
 // The current code contains different parsing options as comments to demonstrate different ways of extracting data.
 
