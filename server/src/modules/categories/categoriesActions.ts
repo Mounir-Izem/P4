@@ -56,4 +56,32 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const categories = {
+      id: Number(req.params.id),
+      name: req.body.name,
+      description: req.body.description,
+    };
+    const affectedRows = await categoriesRepository.update(categories);
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const categoryId = Number(req.params.id);
+    await categoriesRepository.delete(categoryId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, add, edit, destroy };

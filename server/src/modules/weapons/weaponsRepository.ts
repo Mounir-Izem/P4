@@ -61,18 +61,30 @@ class WeaponRepository {
   }
 
   // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing item
-
-  // async update(item: Item) {
-  //   ...
-  // }
-
+  async update(weapons: Weapons): Promise<number> {
+    const [result] = await databaseClient.query<Result>(
+      "UPDATE weapons SET name = ?, description = ?, type_weapon = ?, caliber = ?, category_id = ?, manufacturer_id = ?, date_of_manufacture = ?  WHERE id = ?",
+      [
+        weapons.name,
+        weapons.description,
+        weapons.type_weapon,
+        weapons.caliber,
+        weapons.category_id,
+        weapons.manufacturer_id,
+        weapons.date_of_manufacture,
+        weapons.id,
+      ],
+    );
+    return result.affectedRows;
+  }
   // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an item by its ID
-
-  // async delete(id: number) {
-  //   ...
-  // }
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "delete from weapons where id = ?",
+      [id],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new WeaponRepository();

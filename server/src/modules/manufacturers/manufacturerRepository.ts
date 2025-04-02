@@ -46,18 +46,22 @@ class ManufacturerRepository {
   }
 
   // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing item
+  async update(manufacturer: Manufacturer): Promise<number> {
+    const [result] = await databaseClient.query<Result>(
+      "UPDATE manufacturer SET name = ?, country = ? WHERE id = ?",
+      [manufacturer.name, manufacturer.country, manufacturer.id],
+    );
 
-  // async update(item: Item) {
-  //   ...
-  // }
-
+    return result.affectedRows;
+  }
   // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an item by its ID
-
-  // async delete(id: number) {
-  //   ...
-  // }
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "delete from manufacturer where id = ?",
+      [id],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new ManufacturerRepository();

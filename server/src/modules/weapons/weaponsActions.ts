@@ -63,4 +63,39 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const weapons = {
+      id: Number(req.params.id),
+      name: req.body.name,
+      description: req.body.description,
+      type_weapon: req.body.type_weapon,
+      caliber: req.body.caliber,
+      weight: req.body.weight,
+      length: req.body.length,
+      category_id: req.body.category_id,
+      manufacturer_id: req.body.manufacturer_id,
+      date_of_manufacture: req.body.manufacturer_id,
+    };
+    const affectedRows = await weaponsRepository.update(weapons);
+    if (affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+const destroy: RequestHandler = async (req, res, next) => {
+  try {
+    const weaponsId = Number(req.params.id);
+    await weaponsRepository.delete(weaponsId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, read, add, edit, destroy };

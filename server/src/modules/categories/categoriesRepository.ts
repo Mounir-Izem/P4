@@ -42,18 +42,24 @@ class CategoriesRepository {
   }
 
   // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing item
+  async update(categories: Categories): Promise<number> {
+    const [result] = await databaseClient.query<Result>(
+      "UPDATE categories SET name = ?, description = ? WHERE id = ?",
+      [categories.name, categories.description, categories.id],
+    );
 
-  // async update(item: Item) {
-  //   ...
-  // }
+    return result.affectedRows;
+  }
 
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an item by its ID
-
-  // async delete(id: number) {
-  //   ...
-  // }
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "delete from categories where id = ?",
+      [id],
+    );
+    return result.affectedRows;
+  }
 }
 
 export default new CategoriesRepository();
