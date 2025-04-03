@@ -1,0 +1,37 @@
+.hero-container {
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background: #0f0c29;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+}
+
+.title-hero {
+  font-size: 1rem;
+  color: white;
+  position: relative;
+}
+
+.container-new {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.bar {
+  width: 8rem;
+  height: 0.3rem;
+  background: #ff3cac;
+  background: linear-gradient(to right, #ff3cac, #562b7c, #2b86c5);
+  margin-right: 0.5rem;
+}
+
+section h2 {
+  color: red;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
