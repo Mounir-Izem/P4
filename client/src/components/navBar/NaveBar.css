@@ -1,0 +1,56 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+.logo-app {
+  width: 7rem;
+  border-radius: 50%;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.menu-content {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: white;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.menu-content.open {
+  display: block;
+}
+
+.menu-content li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-content li:last-child {
+  border-bottom: none;
+}
+
+.menu-content li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.menu-content li:hover {
+  background-color: #f0f0f0;
+}
