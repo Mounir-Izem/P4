@@ -1,21 +1,52 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+-- Active: 1740047371237@@127.0.0.1@3306@gun_store
+CREATE TABLE categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE manufacturer (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
+CREATE TABLE weapons (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    type_weapon VARCHAR(50),
+    caliber VARCHAR(50),
+    weight DECIMAL(5,2),
+    length DECIMAL(5,2),
+    category_id INT,
+    manufacturer_id INT,
+    date_of_manufacture INT,
+    picture_url VARCHAR(255),
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(id),
+    CONSTRAINT fk_manufacturer FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(id)
+);
 
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
+INSERT INTO categories (name, description)
+VALUES 
+('Armes à feu', 'Armes qui utilisent de la poudre pour projeter un projectile'),
+('Armes blanches', 'Armes tranchantes ou contondantes, généralement sans mécanisme de tir'),
+('Explosifs', 'Projectiles, objet destiné à exploser pour de gros dégats de zones');
+
+INSERT INTO manufacturer (name, country)
+VALUES 
+('Colt', 'USA'),
+('Beretta', 'Italie'),
+('Heckler & Koch', 'Allemagne'),
+('Kalashnikov', 'URSS'),
+('Glock', 'Autriche'),
+('Amakuni', "Japon"),
+('JAAP', 'Etats-Unis');
+
+INSERT INTO weapons (name, description, caliber, weight, length, category_id, manufacturer_id, date_of_manufacture, type_weapon, picture_url)
+VALUES 
+('M16', 'Fusil d’assaut américain, utilisé principalement par l’armée', '5.56 mm', 3.5, 100, 1, 1, 1964, "Rifle", "/images/M16.jpg"),
+('AK-47', 'Fusil d’assaut soviétique, largement utilisé dans le monde', '7.62 mm', 4.3, 87, 1, 4, 1947, "Rifle", "/images/Ak-47.jpg"),
+('Glock 17', 'Le Glock 17 est un pistolet semi-automatique conçu et fabriqué pour les forces militaires et les services de police', '9 × 19 mm Parabellum', 0.905, 18.6, 1, 5, 1980, 'handgun', "/images/Glock17.jpg"),
+('Katana', 'Épée japonaise traditionnelle, réputée pour sa lame courbée', NULL, 1.2, 80, 2, 6, 800, "Saber", "/images/katana.jpg"),
+('Grenade M67', 'La grenade M67 est une grenade à main défensive à fragmentation, utilisée par les Forces armées des États-Unis', NULL, 0.397, 0.9, 3, 7, 1968, 'Grenade', '/images/GrenadeM67.jpg');
