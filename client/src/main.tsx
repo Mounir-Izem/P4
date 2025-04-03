@@ -17,6 +17,8 @@ import HomePage from "./pages/homePage/HomePage";
 
 /* ************************************************************************* */
 
+import { getAllWeapons } from "./services/requests";
+
 // Create router configuration with routes
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
@@ -26,6 +28,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+        loader: getAllWeapons,
       },
     ],
   },
