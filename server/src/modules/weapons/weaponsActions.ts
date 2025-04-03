@@ -49,6 +49,7 @@ const add: RequestHandler = async (req, res, next) => {
       length: req.body.length,
       category_id: req.body.category_id,
       manufacturer_id: req.body.manufacturer_id,
+      picture_url: req.body.picture_url,
       date_of_manufacture: req.body.date_of_manufacture,
     };
 
@@ -75,6 +76,7 @@ const edit: RequestHandler = async (req, res, next) => {
       length: req.body.length,
       category_id: req.body.category_id,
       manufacturer_id: req.body.manufacturer_id,
+      picture_url: req.body.picture_url,
       date_of_manufacture: req.body.manufacturer_id,
     };
     const affectedRows = await weaponsRepository.update(weapons);

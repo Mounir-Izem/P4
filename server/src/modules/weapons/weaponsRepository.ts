@@ -13,6 +13,7 @@ type Weapons = {
   manufacturer_id: number;
   date_of_manufacture: number;
   type_weapon: string;
+  picture_url: string;
 };
 
 class WeaponRepository {
@@ -21,7 +22,7 @@ class WeaponRepository {
   async create(weapons: Omit<Weapons, "id">) {
     // Execute the SQL INSERT query to add a new weapon to the "weapons" table
     const [result] = await databaseClient.query<Result>(
-      "insert into weapons (name, description, caliber, weight, length, category_id, manufacturer_id, date_of_manufacture, type_weapon) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "insert into weapons (name, description, caliber, weight, length, category_id, manufacturer_id, date_of_manufacture, type_weapon, picture_url) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         weapons.name,
         weapons.description,
@@ -32,6 +33,7 @@ class WeaponRepository {
         weapons.manufacturer_id,
         weapons.date_of_manufacture,
         weapons.type_weapon,
+        weapons.picture_url,
       ],
     );
 
@@ -63,7 +65,7 @@ class WeaponRepository {
   // The U of CRUD - Update operation
   async update(weapons: Weapons): Promise<number> {
     const [result] = await databaseClient.query<Result>(
-      "UPDATE weapons SET name = ?, description = ?, type_weapon = ?, caliber = ?, category_id = ?, manufacturer_id = ?, date_of_manufacture = ?  WHERE id = ?",
+      "UPDATE weapons SET name = ?, description = ?, type_weapon = ?, caliber = ?, category_id = ?, manufacturer_id = ?, date_of_manufacture = ?, picture_url = ?  WHERE id = ?",
       [
         weapons.name,
         weapons.description,
@@ -72,6 +74,7 @@ class WeaponRepository {
         weapons.category_id,
         weapons.manufacturer_id,
         weapons.date_of_manufacture,
+        weapons.picture_url,
         weapons.id,
       ],
     );
