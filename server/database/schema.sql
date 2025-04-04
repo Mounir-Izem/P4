@@ -61,7 +61,7 @@ VALUES
 ('Katana', 'Épée japonaise traditionnelle, réputée pour sa lame courbée', NULL, 1.2, 80, 2, 6, 800, "Saber", "/images/katana.jpg"),
 ('Grenade M67', 'La grenade M67 est une grenade à main défensive à fragmentation, utilisée par les Forces armées des États-Unis', NULL, 0.397, 0.9, 3, 7, 1968, 'Grenade', '/images/GrenadeM67.jpg'),
 ('Desert Eagle', 'Pistolet semi-automatique de gros calibre, célèbre pour sa puissance', '0.50 AE', 1.99, 27, 1, 8, 1983, 'Handgun', '/images/DesertEagle.png'),
-('MP5', 'Pistolet-mitrailleur compact, utilisé par les forces spéciales', '9 mm', 2.54, 68, 1, 3, 1966, 'SMG', '/images/MP5.jpg'),
+('MP5', 'Pistolet-mitrailleur compact, utilisé par les forces spéciales', '9 mm', 2.54, 68, 1, 3, 1966, 'SMG', '/images/MP5.png'),
 ('Barrett M82', 'Fusil de précision anti-matériel, utilisé pour des cibles à longue distance', '12.7×99mm NATO', 14, 144.8, 1, 7, 1982, 'Sniper', '/images/BarrettM82.png'),
 ('Uzi', 'Pistolet-mitrailleur israélien compact et fiable', '9 mm', 3.5, 47, 1, 8, 1950, 'SMG', '/images/Uzi.png'),
 ('Claymore', 'Mine antipersonnel utilisée pour des défenses statiques', NULL, 1.6, 22, 3, 7, 1960, 'Mine', '/images/Claymore.jpg'),
