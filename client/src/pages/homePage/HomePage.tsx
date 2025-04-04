@@ -1,6 +1,6 @@
 import "./HomePage.css";
-import WeaponsCard from "../../components/weaponsCard/WeaponsCard";
 import { useLoaderData } from "react-router-dom";
+import WeaponsCard from "../../components/weaponsCard/WeaponsCard";
 
 export default function HomePage() {
   const data = useLoaderData() as WeaponsDataTypes;
