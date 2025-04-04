@@ -28,7 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-        loader: getAllWeapons,
+        loader: async () => {
+          const weapons = await getAllWeapons();
+          return { weapons };
+        },
       },
     ],
   },
