@@ -8,7 +8,7 @@ export default function WeaponsCard({ weapon }: WeaponsCardProps) {
         <div className="weapons-container">
           <div className="weapon-image">
             <img
-              src={`${import.meta.env.VITE_API_URL}/images/${weapon.picture_url}`}
+              src={`${import.meta.env.VITE_API_URL}/assets/${weapon.picture_url}`}
               alt={weapon.name}
             />
           </div>

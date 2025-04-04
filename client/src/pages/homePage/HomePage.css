@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
   background: #0f0c29;
   background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
