@@ -41,25 +41,65 @@ class WeaponRepository {
     return result.insertId;
   }
 
-  // The Rs of CRUD - Read operations
-
   async read(id: number) {
-    // Execute the SQL SELECT query to retrieve a specific weapon by its ID
     const [rows] = await databaseClient.query<Rows>(
-      "select * from weapons where id = ?",
+      `SELECT 
+        weapons.id,
+        weapons.name,
+        weapons.description,
+        weapons.caliber,
+        weapons.weight,
+        weapons.length,
+        categories.name AS category_name,
+        manufacturer.name AS manufacturer_name,
+        weapons.date_of_manufacture,
+        weapons.type_weapon,
+        weapons.picture_url
+      FROM weapons
+      LEFT JOIN categories ON weapons.category_id = categories.id
+      LEFT JOIN manufacturer ON weapons.manufacturer_id = manufacturer.id
+      WHERE weapons.id = ?`,
       [id],
     );
 
-    // Return the first row of the result, which represents the weapons
-    return rows[0] as Weapons;
+    return rows[0] || null;
   }
+  // The Rs of CRUD - Read operations
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all weapons from the "weapon" table
-    const [rows] = await databaseClient.query<Rows>("select * from weapons");
+    // Requête SQL avec jointures pour récupérer les noms des catégories et des fabricants
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT 
+        weapons.id,
+        weapons.name,
+        weapons.description,
+        weapons.caliber,
+        weapons.weight,
+        weapons.length,
+        categories.name AS category_name,
+        manufacturer.name AS manufacturer_name,
+        weapons.date_of_manufacture,
+        weapons.type_weapon,
+        weapons.picture_url
+      FROM weapons
+      LEFT JOIN categories ON weapons.category_id = categories.id
+      LEFT JOIN manufacturer ON weapons.manufacturer_id = manufacturer.id`,
+    );
 
-    // Return the array of items
-    return rows as Weapons[];
+    // Retourne les résultats avec les noms des catégories et des fabricants
+    return rows as Array<{
+      id: number;
+      name: string;
+      description: string;
+      caliber: string;
+      weight: number;
+      length: number;
+      category_name: string;
+      manufacturer_name: string;
+      date_of_manufacture: number;
+      type_weapon: string;
+      picture_url: string;
+    }>;
   }
 
   // The U of CRUD - Update operation
