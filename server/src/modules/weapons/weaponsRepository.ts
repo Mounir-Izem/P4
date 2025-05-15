@@ -14,6 +14,7 @@ type Weapons = {
   date_of_manufacture: number;
   type_weapon: string;
   picture_url: string;
+  rarity_id: number;
 };
 
 class WeaponRepository {
@@ -22,7 +23,7 @@ class WeaponRepository {
   async create(weapons: Omit<Weapons, "id">) {
     // Execute the SQL INSERT query to add a new weapon to the "weapons" table
     const [result] = await databaseClient.query<Result>(
-      "insert into weapons (name, description, caliber, weight, length, category_id, manufacturer_id, date_of_manufacture, type_weapon, picture_url) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "insert into weapons (name, description, caliber, weight, length, category_id, manufacturer_id, date_of_manufacture, type_weapon, picture_url, rarity_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         weapons.name,
         weapons.description,
@@ -58,6 +59,7 @@ class WeaponRepository {
       FROM weapons
       LEFT JOIN categories ON weapons.category_id = categories.id
       LEFT JOIN manufacturer ON weapons.manufacturer_id = manufacturer.id
+      LEFT JOIN rarity ON weapons.rarity_id = rarity.id
       WHERE weapons.id = ?`,
       [id],
     );
@@ -80,10 +82,14 @@ class WeaponRepository {
         manufacturer.name AS manufacturer_name,
         weapons.date_of_manufacture,
         weapons.type_weapon,
-        weapons.picture_url
+        weapons.picture_url,
+        rarity.name AS rarity_name
       FROM weapons
       LEFT JOIN categories ON weapons.category_id = categories.id
-      LEFT JOIN manufacturer ON weapons.manufacturer_id = manufacturer.id`,
+      LEFT JOIN manufacturer ON weapons.manufacturer_id = manufacturer.id
+      LEFT JOIN rarity ON weapons.rarity_id = rarity.id
+      ORDER BY weapons.date_of_manufacture DESC`,
+      [],
     );
 
     // Retourne les résultats avec les noms des catégories et des fabricants
@@ -105,7 +111,7 @@ class WeaponRepository {
   // The U of CRUD - Update operation
   async update(weapons: Weapons): Promise<number> {
     const [result] = await databaseClient.query<Result>(
-      "UPDATE weapons SET name = ?, description = ?, type_weapon = ?, caliber = ?, category_id = ?, manufacturer_id = ?, date_of_manufacture = ?, picture_url = ?  WHERE id = ?",
+      "UPDATE weapons SET name = ?, description = ?, type_weapon = ?, caliber = ?, category_id = ?, manufacturer_id = ?, date_of_manufacture = ?, picture_url = ?, rarity_id = ? WHERE id = ?",
       [
         weapons.name,
         weapons.description,
@@ -116,6 +122,7 @@ class WeaponRepository {
         weapons.date_of_manufacture,
         weapons.picture_url,
         weapons.id,
+        weapons.rarity_id,
       ],
     );
     return result.affectedRows;

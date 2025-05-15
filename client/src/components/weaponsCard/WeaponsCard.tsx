@@ -3,30 +3,23 @@ import "./weaponsCard.css";
 interface WeaponType {
   name: string;
   picture_url: string;
-  category_id: string;
-  manufacturer_id: string;
+  category_name: string;
+  manufacturer_name: string;
   type_weapon: string;
   caliber: string;
-  rarity?: "common" | "rare" | "epic" | "legendary";
+  rarity_name: string;
 }
 
 interface WeaponsCardProps {
   weapon: WeaponType;
-  size?: "small" | "medium" | "large";
 }
 
-export default function WeaponsCard({
-  weapon,
-  size = "medium",
-}: WeaponsCardProps) {
-  const rarityClass = `rarity-${weapon.rarity || "common"}`;
-
-  const sizeClass = `weapon-card-${size}`;
-
+export default function WeaponsCard({ weapon }: WeaponsCardProps) {
   return (
-    <div className={`weapon-card ${rarityClass} ${sizeClass}`}>
+    <div className="weapon-card">
       <h3 className="weapon-name">{weapon.name}</h3>
-      <p className="weapon-manufacturer">{weapon.manufacturer_id}</p>
+      <p className="weapon-manufacturer">{weapon.manufacturer_name}</p>
+      <p className="rarity">{weapon.rarity_name}</p>
 
       <div className="weapon-image-container">
         <img
@@ -39,7 +32,7 @@ export default function WeaponsCard({
       <div className="weapon-stats">
         <div className="weapon-stat">
           <span className="stat-label">Catégorie:</span>
-          <span className="stat-value">{weapon.category_id}</span>
+          <span className="stat-value">{weapon.category_name}</span>
         </div>
         <div className="weapon-stat">
           <span className="stat-label">Type:</span>

@@ -7,11 +7,11 @@ interface WeaponType {
   id: string;
   name: string;
   picture_url: string;
-  category_id: string;
-  manufacturer_id: string;
+  category_name: string;
+  manufacturer_name: string;
   type_weapon: string;
   caliber: string;
-  rarity?: "common" | "rare" | "epic" | "legendary";
+  rarity_name: string;
 }
 
 interface WeaponsDataTypes {
@@ -21,7 +21,7 @@ interface WeaponsDataTypes {
 export default function HomePage() {
   const data = useLoaderData() as WeaponsDataTypes;
   const weapons = data.weapons;
-  console.info("API:", weapons);
+  console.info("API:", data.weapons);
 
   return (
     <>
@@ -35,7 +35,6 @@ export default function HomePage() {
             <h2>Les nouveautés</h2>
             <div className="bar" />
           </div>
-          {/* Vous pourriez ajouter ici une liste d'armes filtrée pour les nouveautés */}
         </section>
 
         <section className="weapons-section">
@@ -46,7 +45,7 @@ export default function HomePage() {
           <div className="weapons-grid">
             {weapons.map((weapon) => (
               <div key={weapon.id} className="weapon-grid-item">
-                <WeaponsCard weapon={weapon} size="medium" />
+                <WeaponsCard weapon={weapon} />
               </div>
             ))}
           </div>
@@ -57,7 +56,6 @@ export default function HomePage() {
             <h2>Les fabricants</h2>
             <div className="bar" />
           </div>
-          {/* Contenu pour les fabricants */}
         </section>
       </main>
     </>
