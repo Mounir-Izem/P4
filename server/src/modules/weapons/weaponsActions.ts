@@ -51,6 +51,7 @@ const add: RequestHandler = async (req, res, next) => {
       manufacturer_id: req.body.manufacturer_id,
       picture_url: req.body.picture_url,
       date_of_manufacture: req.body.date_of_manufacture,
+      rarity_id: req.body.rarity_id,
     };
 
     // Create the item
@@ -78,6 +79,7 @@ const edit: RequestHandler = async (req, res, next) => {
       manufacturer_id: req.body.manufacturer_id,
       picture_url: req.body.picture_url,
       date_of_manufacture: req.body.manufacturer_id,
+      rarity_id: req.body.rarity_id,
     };
     const affectedRows = await weaponsRepository.update(weapons);
     if (affectedRows === 0) {
